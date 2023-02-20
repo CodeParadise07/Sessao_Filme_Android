@@ -59,7 +59,7 @@ export function Login() {
   const navigation = useNavigation();
 
   const handleClick = () => {
-    navigation.navigate("home");
+    navigation.navigate("Home");
   };
 
   return (

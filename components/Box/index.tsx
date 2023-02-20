@@ -1,36 +1,46 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#1F1F1F",
-    flex: 1,
-    justifyContent: "center",
+    display: "flex",
     alignItems: "center",
-    maxWidth: 300,
-    maxHeight: 300,
-    paddingHorizontal: 30,
-    textAlign: "center",
+    borderRadius: 5,
+    marginLeft: 20,
+    marginTop: 20,
   },
-  title: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
-    marginBottom: 32,
+  banner: {
+    height: 300,
+    width: 200,
+    borderRadius: 5,
+    position: "relative",
   },
-  overview: {
-    color: "#fff",
-  },
-  vote_average: {
-    color: "#9332D6",
+  titleHot: {
+    fontSize: 50,
+    textAlign: "left",
+    marginRight: 10,
+    position: "absolute",
+    top: -20,
+    left: -20,
   },
 });
 
 export function Box(data: any) {
+  const image_path = "https://image.tmdb.org/t/p/w500";
+  const navigation = useNavigation();
+
+  function handleClick() {
+    navigation.navigate("movie");
+  }
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{data.data.title}</Text>
-      <Text style={styles.overview}>{data.data.overview}</Text>
-      <Text style={styles.vote_average}>{data.data.vote_average}</Text>
-    </View>
+    <TouchableOpacity onPress={handleClick}>
+      <View style={styles.container}>
+        <Image
+          style={styles.banner}
+          source={{ uri: `${image_path}${data.data.poster_path}` }}
+        />
+        <Text style={styles.titleHot}>&#128293;</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
