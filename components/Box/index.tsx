@@ -30,7 +30,9 @@ export function Box(data: any) {
   const navigation = useNavigation();
 
   function handleClick() {
-    navigation.navigate("movie");
+    navigation.navigate("movie", {
+      id: data.data.id,
+    });
   }
   return (
     <TouchableOpacity onPress={handleClick}>

@@ -72,40 +72,42 @@ export function Home() {
   let showImageMovie = `${image_path}${recommedation.poster_path}`;
 
   return (
-    <View style={style.container}>
-      <View>
-        <Text style={style.title}>Recomendação</Text>
+    <ScrollView>
+      <View style={style.container}>
         <View>
-          <ImageBackground
-            style={style.bgBannerRecommedation}
-            source={{ uri: showImageMovie }}
-          />
+          <Text style={style.title}>Recomendação</Text>
+          <View>
+            <ImageBackground
+              style={style.bgBannerRecommedation}
+              source={{ uri: showImageMovie }}
+            />
+          </View>
+        </View>
+
+        <View>
+          <Text style={style.title}>Filmes Populares</Text>
+          <FlatList
+            horizontal={true}
+            data={popular}
+            ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
+            renderItem={({ item }) => {
+              return <Box data={item} />;
+            }}
+          ></FlatList>
+        </View>
+
+        <View>
+          <Text style={style.title}>Filmes melhores avalidos</Text>
+          <FlatList
+            horizontal={true}
+            data={topRated}
+            ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
+            renderItem={({ item }) => {
+              return <BoxRated data={item} />;
+            }}
+          ></FlatList>
         </View>
       </View>
-
-      <View>
-        <Text style={style.title}>Filmes Populares</Text>
-        <FlatList
-          horizontal={true}
-          data={popular}
-          ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
-          renderItem={({ item }) => {
-            return <Box data={item} />;
-          }}
-        ></FlatList>
-      </View>
-
-      <View>
-        <Text style={style.title}>Filmes melhores avalidos</Text>
-        <FlatList
-          horizontal={true}
-          data={topRated}
-          ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
-          renderItem={({ item }) => {
-            return <BoxRated data={item} />;
-          }}
-        ></FlatList>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
