@@ -38,6 +38,7 @@ export function Box(data: any) {
     <TouchableOpacity onPress={handleClick}>
       <View style={styles.container}>
         <Image
+          resizeMode="contain"
           style={styles.banner}
           source={{ uri: `${image_path}${data.data.poster_path}` }}
         />

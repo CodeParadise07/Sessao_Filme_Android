@@ -1,9 +1,10 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, ImageBackground, Image, Text } from "react-native";
 import { Styles } from "./style";
 import { useState, useEffect } from "react";
 
 export function ContainerMovie(props: Object) {
   const [movie, setMovie] = useState({});
+  const image_path = "https://image.tmdb.org/t/p/w500";
 
   useEffect(() => {
     const id = props.route.params.id;
@@ -12,15 +13,25 @@ export function ContainerMovie(props: Object) {
     fetch(API)
       .then((response) => response.json())
       .then((data) => setMovie(data));
-
-    console.log(movie);
   }, []);
 
-  console.log(movie);
-
   return (
-    <ScrollView>
-      <View style={Styles.container}></View>
+    <ScrollView style={Styles.scrollBg}>
+      <View style={Styles.container}>
+        <Text style={Styles.titleMovie}>{movie.title}</Text>
+
+        <ImageBackground
+          resizeMode="contain"
+          style={Styles.bgImg}
+          source={{ uri: `${image_path}${movie.backdrop_path}` }}
+        />
+        <Image
+          resizeMode="contain"
+          style={Styles.cardMovie}
+          source={{ uri: `${image_path}${movie.poster_path}` }}
+        />
+        <View style={Styles.containerInfo}></View>
+      </View>
     </ScrollView>
   );
 }
