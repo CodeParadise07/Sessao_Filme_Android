@@ -14,9 +14,13 @@ import { useNavigation } from "@react-navigation/native";
 import { style } from "./Style";
 
 export function Home() {
-  const randomMovie = Math.ceil(Math.random() * 1000);
+  //UseStates
+  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [recommedation, setRecommendation] = useState({});
 
-  console.log(randomMovie);
+  //Pegar numero aleatorio
+  const randomMovie = Math.ceil(Math.random() * 1000);
 
   const navigation = useNavigation();
 
@@ -25,10 +29,6 @@ export function Home() {
       id: randomMovie,
     });
   }
-
-  const [popular, setPopular] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [recommedation, setRecommendation] = useState({});
 
   const image_path = "https://image.tmdb.org/t/p/w500";
 
@@ -52,7 +52,7 @@ export function Home() {
       .then((data) => setRecommendation(data));
   }, []);
 
-  let showImageMovie = `${image_path}${recommedation.poster_path}`;
+  let showImageMovie = `${image_path}${recommedation.backdrop_path}`;
 
   return (
     <ScrollView>
@@ -62,7 +62,6 @@ export function Home() {
           <View>
             <TouchableOpacity onPress={handleClick}>
               <ImageBackground
-                resizeMode="contain"
                 style={style.bgBannerRecommedation}
                 source={{ uri: showImageMovie }}
               />

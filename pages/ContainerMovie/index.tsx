@@ -24,8 +24,6 @@ export function ContainerMovie(props: Object) {
       .then((data) => setMovie(data));
   }, []);
 
-  console.log(props);
-
   const star = movie.vote_average;
   const population = movie.popularity;
 
