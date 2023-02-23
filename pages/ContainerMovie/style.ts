@@ -5,32 +5,59 @@ export const Styles = StyleSheet.create({
     backgroundColor: "#1F1F1F",
   },
   container: {},
-
-  bgImg: {
-    marginBottom: 100,
-    height: 250,
-    width: "100%",
-    position: "relative",
-  },
   titleMovie: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 18,
     textTransform: "uppercase",
     textAlign: "center",
-    marginTop: 20,
   },
-  cardMovie: {
-    height: 200,
-    width: 175,
-    borderRadius: 10,
-    bottom: 150,
-    marginLeft: 10,
+  bgImg: {
+    marginBottom: 30,
+    height: 220,
+  },
+
+  containerInfo: {
+    bottom: 10,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 30,
   },
-  containerInfo: {
-    width: "100%",
-    bottom: 10,
+  containerText: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "row",
+    marginRight: 30,
+  },
+  category: {
+    color: "#ccc",
+    marginLeft: 5,
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  description: {
+    color: "#fff",
+    textAlign: "justify",
+    fontSize: 14,
+    padding: 30,
+  },
+  containerButton: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 30,
+  },
+  button: {
+    backgroundColor: "#9332D6",
+    maxWidth: 100,
+    padding: 20,
+    marginHorizontal: "auto",
+    borderRadius: 20,
+  },
+  buttonTitle: {
+    color: "#fff",
+    textAlign: "center",
   },
 });

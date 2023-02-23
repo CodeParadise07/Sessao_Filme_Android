@@ -1,4 +1,5 @@
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const image_path = "https://image.tmdb.org/t/p/w500";
 
@@ -28,12 +29,22 @@ const styles = StyleSheet.create({
 });
 
 export function BoxRated(data: any) {
+  const navigation = useNavigation();
+
+  function handleClick() {
+    navigation.navigate("movie", {
+      id: data.data.id,
+    });
+  }
+
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.banner}
-        source={{ uri: `${image_path}${data.data.backdrop_path}` }}
-      />
-    </View>
+    <TouchableOpacity onPress={handleClick}>
+      <View style={styles.container}>
+        <Image
+          style={styles.banner}
+          source={{ uri: `${image_path}${data.data.backdrop_path}` }}
+        />
+      </View>
+    </TouchableOpacity>
   );
 }

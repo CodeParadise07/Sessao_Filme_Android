@@ -6,19 +6,31 @@ import {
   ScrollView,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import { useState, useEffect } from "react";
 import { Box } from "../../components/Box";
 import { BoxRated } from "../../components/BoxRated";
+import { useNavigation } from "@react-navigation/native";
 
 export function Home() {
+  const randomMovie = Math.ceil(Math.random() * 1000);
+
+  console.log(randomMovie);
+
+  const navigation = useNavigation();
+
+  function handleClick() {
+    navigation.navigate("movie", {
+      id: randomMovie,
+    });
+  }
+
   const [popular, setPopular] = useState([]);
   const [topRated, setTopRated] = useState([]);
   const [recommedation, setRecommendation] = useState({});
 
   const image_path = "https://image.tmdb.org/t/p/w500";
-
-  const randomMovie = Math.ceil(Math.random() * 1000);
 
   useEffect(() => {
     fetch(
@@ -77,10 +89,13 @@ export function Home() {
         <View>
           <Text style={style.title}>Recomendação</Text>
           <View>
-            <ImageBackground
-              style={style.bgBannerRecommedation}
-              source={{ uri: showImageMovie }}
-            />
+            <TouchableOpacity onPress={handleClick}>
+              <ImageBackground
+                resizeMode="contain"
+                style={style.bgBannerRecommedation}
+                source={{ uri: showImageMovie }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 

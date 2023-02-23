@@ -40,7 +40,7 @@ export function Box(data: any) {
         <Image
           resizeMode="contain"
           style={styles.banner}
-          source={{ uri: `${image_path}${data.data.poster_path}` }}
+          source={{ uri: `${image_path}${data.data.backdrop_path}` }}
         />
         <Text style={styles.titleHot}>&#128293;</Text>
       </View>
