@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   View,
   Text,
   FlatList,
@@ -12,6 +11,7 @@ import { useState, useEffect } from "react";
 import { Box } from "../../components/Box";
 import { BoxRated } from "../../components/BoxRated";
 import { useNavigation } from "@react-navigation/native";
+import { style } from "./Style";
 
 export function Home() {
   const randomMovie = Math.ceil(Math.random() * 1000);
@@ -51,35 +51,6 @@ export function Home() {
       .then((response) => response.json())
       .then((data) => setRecommendation(data));
   }, []);
-
-  const style = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#1f1f1f",
-      color: "#fff",
-    },
-    title: {
-      color: "#fff",
-      alignItems: "center",
-      fontSize: 24,
-      padding: 10,
-      fontStyle: "bold",
-    },
-    bgBannerRecommedation: {
-      height: 400,
-      width: "100%",
-      opacity: 0.2,
-      position: "relative",
-    },
-    bgTitle: {
-      position: "absolute",
-      color: "#fff",
-      fontSize: 30,
-      fontWeight: "bold",
-      marginTop: 30,
-      marginLeft: 30,
-    },
-  });
 
   let showImageMovie = `${image_path}${recommedation.poster_path}`;
 
