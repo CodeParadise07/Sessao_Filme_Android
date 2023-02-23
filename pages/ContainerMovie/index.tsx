@@ -10,18 +10,50 @@ import {
 import { Styles } from "./style";
 import { useState, useEffect } from "react";
 import IconIo from "react-native-vector-icons/Ionicons";
+import YoutubeIframe from "react-native-youtube-iframe";
 
-export function ContainerMovie(props: Object) {
-  const [movie, setMovie] = useState({});
+interface movieAPI {
+  vote_average: Number;
+  popularity: Number;
+  title: String;
+  backdrop_path: String;
+  overview: String;
+  homepage: String;
+}
+
+interface movieProps {
+  route: {
+    params: {
+      id: String;
+    };
+  };
+}
+export function ContainerMovie(props: movieProps) {
+  const [movie, setMovie] = useState<movieAPI>({
+    vote_average: 0,
+    popularity: 0,
+    title: "",
+    backdrop_path: "",
+    overview: "",
+    homepage: "",
+  });
+  const [trailer, setTrailer] = useState([]);
   const image_path = "https://image.tmdb.org/t/p/w500";
 
   useEffect(() => {
     const id = props.route.params.id;
     const API = `https://api.themoviedb.org/3/movie/${id}?api_key=dfe68602b34df2dbb9c6c15dcfea7dfe&language=pt-BR`;
+    const getTrailer = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=dfe68602b34df2dbb9c6c15dcfea7dfe&language=pt-BR `;
 
     fetch(API)
       .then((response) => response.json())
       .then((data) => setMovie(data));
+
+    fetch(getTrailer)
+      .then((response) => response.json())
+      .then((data) => setTrailer(data.results[1].key));
+
+    console.log(trailer);
   }, []);
 
   const star = movie.vote_average;
@@ -31,10 +63,18 @@ export function ContainerMovie(props: Object) {
     <ScrollView style={Styles.scrollBg}>
       <View style={Styles.container}>
         <ImageBackground
-          resizeMode="contain"
+          resizeMode="cover"
           style={Styles.bgImg}
           source={{ uri: `${image_path}${movie.backdrop_path}` }}
         />
+
+        <View style={Styles.trailer}>
+          <YoutubeIframe
+            videoId={trailer.toString()}
+            height={300}
+            width={400}
+          />
+        </View>
 
         <Text style={Styles.titleMovie}>{movie.title}</Text>
 

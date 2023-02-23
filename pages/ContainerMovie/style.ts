@@ -13,23 +13,31 @@ export const Styles = StyleSheet.create({
     textAlign: "center",
   },
   bgImg: {
-    marginBottom: 30,
-    height: 220,
+    position: "relative",
+    opacity: 0.5,
+    marginBottom: 0,
+    height: 150,
+    padding: 40,
+    zIndex: 1,
   },
-
+  trailer: {
+    marginTop: -5,
+    position: "relative",
+    zIndex: 2,
+  },
   containerInfo: {
     bottom: 10,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    marginTop: 30,
   },
   containerText: {
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
     marginRight: 30,
+    marginTop: 30,
   },
   category: {
     color: "#ccc",

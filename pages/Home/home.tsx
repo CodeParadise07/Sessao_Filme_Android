@@ -3,7 +3,6 @@ import {
   Text,
   FlatList,
   ScrollView,
-  Image,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
@@ -14,24 +13,6 @@ import { useNavigation } from "@react-navigation/native";
 import { style } from "./Style";
 
 export function Home() {
-  //UseStates
-  const [popular, setPopular] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [recommedation, setRecommendation] = useState({});
-
-  //Pegar numero aleatorio
-  const randomMovie = Math.ceil(Math.random() * 1000);
-
-  const navigation = useNavigation();
-
-  function handleClick() {
-    navigation.navigate("movie", {
-      id: randomMovie,
-    });
-  }
-
-  const image_path = "https://image.tmdb.org/t/p/w500";
-
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?api_key=dfe68602b34df2dbb9c6c15dcfea7dfe&language=pt-BR&page=1`
@@ -52,7 +33,31 @@ export function Home() {
       .then((data) => setRecommendation(data));
   }, []);
 
+  interface recommedationAPI {
+    backdrop_path: String;
+  }
+
+  //UseStates
+  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [recommedation, setRecommendation] = useState<recommedationAPI>({
+    backdrop_path: "",
+  });
+
+  //Pegar numero aleatorio
+  let randomMovie = Math.ceil(Math.random() * 1000);
+
+  const navigation = useNavigation();
+
+  const image_path = "https://image.tmdb.org/t/p/w500";
+
   let showImageMovie = `${image_path}${recommedation.backdrop_path}`;
+
+  function handleClick() {
+    navigation.navigate("movie", {
+      id: randomMovie,
+    });
+  }
 
   return (
     <ScrollView>
