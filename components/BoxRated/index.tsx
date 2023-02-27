@@ -16,6 +16,7 @@ export function BoxRated(data: any) {
     <TouchableOpacity onPress={handleClick}>
       <View style={style.container}>
         <Image
+          resizeMode="cover"
           style={style.banner}
           source={{ uri: `${image_path}${data.data.backdrop_path}` }}
         />

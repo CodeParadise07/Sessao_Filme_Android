@@ -20,7 +20,6 @@ export function Box(data: any) {
           style={style.banner}
           source={{ uri: `${image_path}${data.data.poster_path}` }}
         />
-        <Text style={style.titleHot}>&#128293;</Text>
       </View>
     </TouchableOpacity>
   );

@@ -6,6 +6,20 @@ export const style = StyleSheet.create({
     backgroundColor: "#1f1f1f",
     color: "#fff",
   },
+  bgSearch: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderBottomColor: "#fff",
+    borderBottomWidth: 1,
+  },
+  searchTitle: {
+    color: "#fff",
+    marginLeft: 10,
+  },
   title: {
     color: "#fff",
     alignItems: "center",

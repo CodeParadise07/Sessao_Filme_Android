@@ -11,8 +11,17 @@ import { Box } from "../../components/Box";
 import { BoxRated } from "../../components/BoxRated";
 import { useNavigation } from "@react-navigation/native";
 import { style } from "./Style";
+import Icon from "react-native-vector-icons/Feather";
 
 export function Home() {
+  //UseStates
+  const [popular, setPopular] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [recommedation, setRecommendation] = useState<recommedationAPI>({
+    backdrop_path: "",
+  });
+  const [shortly, setShortly] = useState([]);
+
   useEffect(() => {
     fetch(
       `https://api.themoviedb.org/3/movie/popular?api_key=dfe68602b34df2dbb9c6c15dcfea7dfe&language=pt-BR&page=1`
@@ -31,18 +40,17 @@ export function Home() {
     )
       .then((response) => response.json())
       .then((data) => setRecommendation(data));
+
+    fetch(
+      `https://api.themoviedb.org/3/movie/upcoming?api_key=dfe68602b34df2dbb9c6c15dcfea7dfe&language=pt-BR&page=1`
+    )
+      .then((response) => response.json())
+      .then((data) => setShortly(data.results));
   }, []);
 
   interface recommedationAPI {
     backdrop_path: String;
   }
-
-  //UseStates
-  const [popular, setPopular] = useState([]);
-  const [topRated, setTopRated] = useState([]);
-  const [recommedation, setRecommendation] = useState<recommedationAPI>({
-    backdrop_path: "",
-  });
 
   //Pegar numero aleatorio
   let randomMovie = Math.ceil(Math.random() * 1000);
@@ -58,10 +66,17 @@ export function Home() {
       id: randomMovie,
     });
   }
+  function handleSearch() {
+    navigation.navigate("search");
+  }
 
   return (
     <ScrollView>
       <View style={style.container}>
+        <TouchableOpacity style={style.bgSearch} onPress={handleSearch}>
+          <Icon name="search" size={25} color="#fff" />
+          <Text style={style.searchTitle}>Pesquisar</Text>
+        </TouchableOpacity>
         <View>
           <Text style={style.title}>Recomendação</Text>
           <View>
@@ -94,6 +109,18 @@ export function Home() {
             ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
             renderItem={({ item }) => {
               return <BoxRated data={item} />;
+            }}
+          ></FlatList>
+        </View>
+
+        <View>
+          <Text style={style.title}>Novos filmes!</Text>
+          <FlatList
+            horizontal={true}
+            data={shortly}
+            ListEmptyComponent={() => <Text>Ninguem chegou</Text>}
+            renderItem={({ item }) => {
+              return <Box isFire={false} data={item} />;
             }}
           ></FlatList>
         </View>
