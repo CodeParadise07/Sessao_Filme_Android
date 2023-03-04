@@ -4,8 +4,6 @@ import {
   ImageBackground,
   Text,
   TouchableOpacity,
-  Linking,
-  Alert,
 } from "react-native";
 import { Styles } from "./style";
 import { useState, useEffect } from "react";
@@ -13,6 +11,7 @@ import IconIo from "react-native-vector-icons/Ionicons";
 import YoutubeIframe from "react-native-youtube-iframe";
 
 interface movieAPI {
+  id: Number;
   vote_average: Number;
   popularity: Number;
   title: String;
@@ -28,8 +27,10 @@ interface movieProps {
     };
   };
 }
+
 export function ContainerMovie(props: movieProps) {
   const [movie, setMovie] = useState<movieAPI>({
+    id: 0,
     vote_average: 0,
     popularity: 0,
     title: "",
@@ -52,8 +53,6 @@ export function ContainerMovie(props: movieProps) {
     fetch(getTrailer)
       .then((response) => response.json())
       .then((data) => setTrailer(data.results[1].key));
-
-    console.log(trailer);
   }, []);
 
   const star = movie.vote_average;
@@ -93,20 +92,8 @@ export function ContainerMovie(props: movieProps) {
           <Text style={Styles.description}>{movie.overview}</Text>
         </View>
         <View style={Styles.containerButton}>
-          <TouchableOpacity
-            style={Styles.button}
-            onPress={() =>
-              movie.homepage != ""
-                ? Linking.openURL(`${movie.homepage}`)
-                : Alert.alert("Alerta", "Sem link para o trailer", [
-                    {
-                      text: "Ok",
-                      style: "cancel",
-                    },
-                  ])
-            }
-          >
-            <Text style={Styles.buttonTitle}>Assistir</Text>
+          <TouchableOpacity style={Styles.button} onPress={() => saveMovie()}>
+            <Text style={Styles.buttonTitle}>Salvar</Text>
           </TouchableOpacity>
         </View>
       </View>

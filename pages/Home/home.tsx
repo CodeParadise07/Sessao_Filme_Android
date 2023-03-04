@@ -6,7 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Box } from "../../components/Box";
 import { BoxRated } from "../../components/BoxRated";
 import { useNavigation } from "@react-navigation/native";
